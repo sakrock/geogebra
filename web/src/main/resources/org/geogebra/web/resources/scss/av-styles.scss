@@ -218,7 +218,7 @@ $duration: 0.2s;
 			}
 	}
 	.customScrollbar {
-		&:hover {
+		&.showScroll {
 			scrollbar-color: rgba(0, 0, 0, 0.38) $white;
 			&::-webkit-scrollbar-thumb {
 				background: rgba(0, 0, 0, 0.38);

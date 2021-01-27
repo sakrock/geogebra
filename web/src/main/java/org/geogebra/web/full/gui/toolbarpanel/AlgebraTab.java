@@ -5,7 +5,9 @@ import org.geogebra.web.full.gui.view.algebra.AlgebraViewW;
 import org.geogebra.web.full.gui.view.algebra.RadioTreeItem;
 
 import com.google.gwt.core.client.Scheduler;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.user.client.Event;
 import com.google.gwt.user.client.ui.SimplePanel;
 
 /**
@@ -47,6 +49,17 @@ public class AlgebraTab extends ToolbarPanel.ToolbarTab {
 			}
 
 			simplep = new SimplePanel(aview = av);
+			Event.addNativePreviewHandler(event -> {
+				Element el = Element.as(event.getNativeEvent().getEventTarget());
+
+				String type = event.getNativeEvent().getType();
+				if (getElement().isOrHasChild(el) && "mousewheel".equals(type)) {
+					addStyleName("showScroll");
+				}
+				if (getElement() == el && "mouseout".equals(type)) {
+					removeStyleName("showScroll");
+				}
+			});
 			add(simplep);
 			simplep.addStyleName("algebraSimpleP");
 			addStyleName("algebraPanel");
